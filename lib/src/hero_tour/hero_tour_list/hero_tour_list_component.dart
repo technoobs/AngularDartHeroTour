@@ -17,9 +17,9 @@ import '../../mock_heroes.dart';
   styleUrls: ['hero_tour_list_component.css'],
   templateUrl: 'hero_tour_list_component.html',
   directives: [
-    coreDirectives, 
+    coreDirectives,
     formDirectives,
-    HeroComponent                                                                           
+    HeroComponent
   ],
   providers: [ClassProvider(HeroService)],
   pipes: [commonPipes],
@@ -41,7 +41,7 @@ class HeroTourListComponent implements OnInit {
 
   Hero selectedHero;
   // List<Hero> heroList = mockHeroes;
-  List<Hero> heroList;
+  List < Hero > heroList;
 
   void ngOnInit() {
     window.console.log("Before async function");
@@ -68,13 +68,30 @@ class HeroTourListComponent implements OnInit {
   //   );
   // }
 
-  Future<void> _getAllHeroes() async {
+  Future < void > _getAllHeroes() async {
     window.console.log("Before await");
     heroList = await _heroService.getAllHeroes();
     window.console.log("After await");
   }
 
-  String _heroUrl(int id) => RoutePaths.hero.toUrl(parameters: {idParam: '$id'});
+  String _heroUrl(int id) => RoutePaths.hero.toUrl(parameters: {
+    idParam: '$id'
+  });
 
-  Future<NavigationResult> gotoDetail() => _router.navigate(_heroUrl(selectedHero.id));
+  Future < NavigationResult > gotoDetail() => _router.navigate(_heroUrl(selectedHero.id));
+
+  Future < void > add(String name) async {
+    name = name.trim();
+    if (name.isEmpty) return null;
+    heroList.add(await _heroService.create(name));
+    selectedHero = null;
+  }
+
+  Future < void > delete(Hero hero) async {
+    await _heroService.delete(hero.id);
+    heroList.remove(hero);
+    if (selectedHero == hero) selectedHero = null;
+  }
+
+
 }
