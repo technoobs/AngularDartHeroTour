@@ -1,7 +1,10 @@
 import 'package:angular/angular.dart';
 
 import 'src/todo_list/todo_list_component.dart';
-import 'src/hero_tour/hero_tour_component.dart';
+import 'src/hero_tour/hero_tour_list/hero_tour_list_component.dart';
+import 'src/hero_tour/hero_route/hero_tour_route_component.dart';
+
+import 'src/routes.dart';
 
 // AngularDart info: https://webdev.dartlang.org/angular
 // Components info: https://webdev.dartlang.org/components
@@ -10,7 +13,12 @@ import 'src/hero_tour/hero_tour_component.dart';
   selector: 'my-app',
   styleUrls: ['app_component.css'],
   templateUrl: 'app_component.html',
-  directives: [coreDirectives, TodoListComponent, HeroTourComponent],
+  directives: [
+    coreDirectives, 
+    HeroTourApp,
+    TodoListComponent, 
+    // HeroTourListComponent
+  ],
 )
 class AppComponent {
   // Nothing here yet. All logic is in TodoListComponent.
