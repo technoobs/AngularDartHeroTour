@@ -35,8 +35,10 @@ class HeroTourComponent implements OnInit {
   List<Hero> heroList;
 
   void ngOnInit() {
+    window.console.log("Before async function");
     // fetch all heroes information
     _getAllHeroes();
+    window.console.log("After async function");
   }
 
   // clikc and show hero details
@@ -45,15 +47,21 @@ class HeroTourComponent implements OnInit {
     selectedHero = hero;
   }
 
-  void _getAllHeroes() {
-    _heroService.getAllHeroes().then(
-      (heroes) {
-        // print("get heroes data");
-        // print("$heroes");
-        window.console.info("Get heroes data");
-        window.console.info(heroes);
-        this.heroList = heroes;
-      }
-    );
+  // void _getAllHeroes() {
+  //   _heroService.getAllHeroes().then(
+  //     (heroes) {
+  //       // print("get heroes data");
+  //       // print("$heroes");
+  //       window.console.info("Get heroes data");
+  //       window.console.info(heroes);
+  //       this.heroList = heroes;
+  //     }
+  //   );
+  // }
+
+  Future<void> _getAllHeroes() async {
+    window.console.log("Before await");
+    heroList = await _heroService.getAllHeroes();
+    window.console.log("After await");
   }
 }
