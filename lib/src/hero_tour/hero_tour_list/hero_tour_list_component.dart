@@ -7,6 +7,8 @@ import 'package:angular_router/angular_router.dart';
 
 import '../hero_component/hero_component.dart';
 import '../hero_service/hero_service.dart';
+import '../../route_paths.dart';
+
 import '../../hero.dart';
 import '../../mock_heroes.dart';
 
@@ -24,11 +26,14 @@ import '../../mock_heroes.dart';
 )
 class HeroTourListComponent implements OnInit {
 
+  final Router _router;
+
   // inject service
   final HeroService _heroService;
-  HeroTourListComponent(this._heroService);
+  // HeroTourListComponent(this._heroService);
+  HeroTourListComponent(this._heroService, this._router);
 
-  Future<NavigationResult> gotoDetail() => null;
+  // Future<NavigationResult> gotoDetail() => null;
 
 
   final title = "Tour of Heroes";
@@ -68,4 +73,8 @@ class HeroTourListComponent implements OnInit {
     heroList = await _heroService.getAllHeroes();
     window.console.log("After await");
   }
+
+  String _heroUrl(int id) => RoutePaths.hero.toUrl(parameters: {idParam: '$id'});
+
+  Future<NavigationResult> gotoDetail() => _router.navigate(_heroUrl(selectedHero.id));
 }
