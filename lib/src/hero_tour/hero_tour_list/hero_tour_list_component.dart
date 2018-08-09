@@ -87,4 +87,11 @@ class HeroTourListComponent implements OnInit {
     selectedHero = null;
   }
 
+  Future < void > delete(Hero hero) async {
+    await _heroService.delete(hero.id);
+    heroList.remove(hero);
+    if (selectedHero == hero) selectedHero = null;
+  }
+
+
 }

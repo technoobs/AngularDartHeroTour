@@ -93,4 +93,15 @@ class HeroService {
     }
   }
 
+  // delete hero
+  Future < void > delete(int id) async {
+    try {
+      final url = '$_heroesUrl/$id';
+      await _http.delete(url, headers: _headers);
+    } catch (e) {
+      throw _handleError(e);
+    }
+  }
+
+
 }
