@@ -1,11 +1,11 @@
 <h1>My First AngularDart App</h1>
 
-<button type="button" class="">Show Todo</button>
-<button type="button" class="">Show Heros Tour</button>
+<button type="button" class="btn btn-primary" (click)="changeViewToTodo()">Show Todo</button>
+<button type="button" class="btn btn-secondary" (click)="changeViewToHero()">Show Heros Tour</button>
 
-<!-- <div *ngIf=>
-
-</div> -->
-<todo-list></todo-list>
-
-<app-hero-tour></app-hero-tour>
+<div *ngIf="show_todo_view">
+        <todo-list></todo-list>
+</div>
+<div *ngIf="show_hero_view">
+        <app-hero-tour></app-hero-tour>
+</div>
