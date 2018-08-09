@@ -15,5 +15,12 @@ class HeroTourComponent {
   final title = "Tour of Heroes";
   // Hero hero = Hero(1, "Windstorm");
 
+  Hero selectedHero;
   List<Hero> heroList = mockHeroes;
+
+  // clikc and show hero details
+  onSelect(Hero hero) {
+    print("Selected hero is: $hero");
+    selectedHero = hero;
+  }
 }
