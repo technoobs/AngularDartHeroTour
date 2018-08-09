@@ -21,7 +21,8 @@ class HeroService {
   //   (await getAllHeroes()).firstWhere((hero) => hero.id == id);
 
 
-  static const _heroesUrl = 'api/heroes'; // URL to web API
+  static
+  const _heroesUrl = 'api/heroes'; // URL to web API
 
   final Client _http;
 
@@ -36,7 +37,7 @@ class HeroService {
       final heroes = (_extractData(response) as List)
         .map((json) => Hero.fromJson(json))
         .toList();
-      
+
       window.console.log("Heroes data are:");
       window.console.log(heroes);
 
@@ -63,19 +64,33 @@ class HeroService {
     return Exception('Server error; cause: $e');
   }
 
-  static final _headers = {'Content-Type': 'application/json'};
-// ···
-Future<Hero> update(Hero hero) async {
-  try {
-    final url = '$_heroesUrl/${hero.id}';
-    final response =
+  static final _headers = {
+    'Content-Type': 'application/json'
+  };
+  // ···
+  // update hero for the view only
+  Future < Hero > update(Hero hero) async {
+    try {
+      final url = '$_heroesUrl/${hero.id}';
+      final response =
         await _http.put(url, headers: _headers, body: json.encode(hero));
-    return Hero.fromJson(_extractData(response));
-  } catch (e) {
-    throw _handleError(e);
+      return Hero.fromJson(_extractData(response));
+    } catch (e) {
+      throw _handleError(e);
+    }
   }
-}
 
-
+  // create new hero
+  Future < Hero > create(String name) async {
+    try {
+      final response = await _http.post(_heroesUrl,
+        headers: _headers, body: json.encode({
+          'name': name
+        }));
+      return Hero.fromJson(_extractData(response));
+    } catch (e) {
+      throw _handleError(e);
+    }
+  }
 
 }
