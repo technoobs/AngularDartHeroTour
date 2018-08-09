@@ -1,6 +1,7 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 
+import './hero_tour/hero_search/hero_search_component.dart';
 import 'hero.dart';
 import './hero_tour/hero_service/hero_service.dart';
 import 'route_paths.dart';
@@ -9,7 +10,7 @@ import 'route_paths.dart';
   selector: 'my-dashboard',
   templateUrl: 'dashboard_component.html',
   styleUrls: ['dashboard_component.css'],
-  directives: [coreDirectives, routerDirectives],
+  directives: [coreDirectives, routerDirectives, HeroSearchComponent],
 )
 
 class DashboardComponent implements OnInit {
