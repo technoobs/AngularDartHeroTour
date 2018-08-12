@@ -1,5 +1,6 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
+import 'package:angular_forms/angular_forms.dart';
 
 import './hero_tour/hero_search/hero_search_component.dart';
 import 'hero.dart';
@@ -14,7 +15,12 @@ import 'dart:html';
   selector: 'my-dashboard',
   templateUrl: 'dashboard_component.html',
   styleUrls: ['dashboard_component.css'],
-  directives: [coreDirectives, routerDirectives, HeroSearchComponent],
+  directives: [
+    coreDirectives, 
+    routerDirectives,
+    formDirectives, 
+    HeroSearchComponent
+  ],
 )
 
 class DashboardComponent implements OnInit {
@@ -22,6 +28,8 @@ class DashboardComponent implements OnInit {
 
   // list of new generation heroes
   List<NextGenHero> nextGenHeroes;
+  // new generation hero
+  NextGenHero newGenHero;
 
   // url for one single hero
   String heroUrl(int id) => RoutePaths.hero.toUrl(parameters: {idParam: '$id'});
@@ -41,6 +49,14 @@ class DashboardComponent implements OnInit {
 
     window.console.log("Dashboard fetching data");
     nextGenHeroes = await this._heroDataService.getAllHeroes();
+  }
+
+  // send new hero information to backend server
+  addNewHero() {
+    // var heroName = document.getElementById("name").nodeValue;
+    // var heroAbility = document.getElementById("ability").nodeValue;
+
+    window.console.log(newGenHero.heroName);
   }
 }
 

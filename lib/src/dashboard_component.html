@@ -12,10 +12,31 @@
     </a>
 </div>
 
-
-<div *ngFor="let nxtHero of nextGenHeroes">
-    <a>{{nxtHero.heroName}}</a>
-    <a>{{nxtHero.heroAbility}}</a>
-</div>
-
 <hero-search></hero-search>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+            <h4>Retrieve Heroes from Backend</h4>
+            <div *ngFor="let nxtHero of nextGenHeroes">
+                <a>{{nxtHero.heroName}}</a>
+                <a>{{nxtHero.heroAbility}}</a>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+            <h4>Add New Hero to Backend</h4>
+            <form>
+                <div class="form-group">
+                    <label for="name">Hero Name</label>
+                    <input type="text" class="form-control" id="name" [(ngModel)]="newGenHero.heroName" ngControl="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="ability">Hero Ability</label>
+                    <input type="text" class="form-control" id="ability" [(ngModel)]="newGenHero.heroAbility" ngControl="ability" required>
+                </div>
+                <button type="button" class="btn btn-primary" (click)="addNewHero()">Add Hero</button>
+            </form>
+        </div>
+    </div>
+</div>
