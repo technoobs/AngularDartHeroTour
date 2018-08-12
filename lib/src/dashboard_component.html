@@ -11,4 +11,11 @@
         </div>
     </a>
 </div>
+
+
+<div *ngFor="let nxtHero of nextGenHeroes">
+    <a>{{nxtHero.heroName}}</a>
+    <a>{{nxtHero.heroAbility}}</a>
+</div>
+
 <hero-search></hero-search>
