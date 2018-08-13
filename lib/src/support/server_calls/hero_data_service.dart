@@ -12,6 +12,7 @@ import '../data_model/next_generate_hero.dart';
 
 class HeroDataService {
 
+  // base URL for api
   static const _baseUrl = "http://tecnooob.com/dartserver/";
 
   final Client _http;
@@ -44,14 +45,7 @@ class HeroDataService {
   }
 
   dynamic _extractData(Response resp) {
-    window.console.log("***********");
-    // window.console.log(json.decode(resp.body)['data']['data']);
-    // var HeroResponse = jsonDecode(json.decode(resp.body)['data']);
-
-    // assert(heroList is List);
-
-    // return heroList;
-
+    print("Extracting data from server response....");
     return json.decode(resp.body)['data'];
   }
 

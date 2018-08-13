@@ -1,7 +1,5 @@
 import 'package:angular/angular.dart';
 
-import 'src/todo_list/todo_list_component.dart';
-import 'src/hero_tour/hero_tour_list/hero_tour_list_component.dart';
 import 'src/hero_tour/hero_route/hero_tour_route_component.dart';
 
 import 'src/routes.dart';
@@ -16,7 +14,6 @@ import 'src/routes.dart';
   directives: [
     coreDirectives, 
     HeroTourApp,
-    TodoListComponent, 
     // HeroTourListComponent
   ],
 )
