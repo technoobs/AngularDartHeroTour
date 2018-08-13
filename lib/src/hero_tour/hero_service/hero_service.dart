@@ -1,52 +1,35 @@
-// import 'dart:async';
-
-// import '../../hero.dart';
-// import '../../mock_heroes.dart';
-
 import 'dart:async';
 import 'dart:convert';
 import 'dart:html';
 
 import 'package:http/http.dart';
 
-import '../../hero.dart';
+import '../../support/data_model/hero.dart';
 
 
 class HeroService {
-  // get full list of heroes
-  // Future<List<Hero>> getAllHeroes() async => mockHeroes;
-
-  // get one hero by id  
-  // Future<Hero> get(int id) async =>
-  //   (await getAllHeroes()).firstWhere((hero) => hero.id == id);
-
-
-  static
-  const _heroesUrl = 'api/heroes'; // URL to web API
+  static const _heroesUrl = 'api/heroes'; // URL to web API
 
   final Client _http;
 
   HeroService(this._http);
 
+  // get all heroes
   Future < List < Hero >> getAllHeroes() async {
     try {
-
-      window.console.log("Hero service get all heroes....");
+      print("Hero service get all heroes....");
 
       final response = await _http.get(_heroesUrl);
       final heroes = (_extractData(response) as List)
         .map((json) => Hero.fromJson(json))
         .toList();
-
-      window.console.log("Heroes data are:");
-      window.console.log(heroes);
-
       return heroes;
     } catch (e) {
       throw _handleError(e);
     }
   }
 
+  // get details of one single hero
   Future < Hero > get(int id) async {
     try {
       final response = await _http.get('$_heroesUrl/$id');
@@ -56,7 +39,6 @@ class HeroService {
     }
   }
 
-
   dynamic _extractData(Response resp) => json.decode(resp.body)['data'];
 
   Exception _handleError(dynamic e) {
@@ -64,6 +46,7 @@ class HeroService {
     return Exception('Server error; cause: $e');
   }
 
+  // header that used for http request
   static final _headers = {
     'Content-Type': 'application/json'
   };

@@ -1,8 +1,20 @@
-<h1>{{title}}</h1>
-<!-- <my-heroes></my-heroes> -->
-<!-- <app-hero-tour-list></app-hero-tour-list> -->
-<nav>
-    <a [routerLink]="RoutePaths.dashboard.toUrl()" [routerLinkActive]="'active'">Dashboard</a>
-    <a [routerLink]="RoutePaths.heroes.toUrl()" [routerLinkActive]="'active'">Heroes</a>
-</nav>
-<router-outlet [routes]="Routes.all"></router-outlet>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1>{{title}}</h1>
+        </div>
+        <div class="col-12 nav-btn">
+            <button type="button" class="btn btn-primary" (click)="goToDashboard()">Dashboard</button>
+            <button type="button" class="btn btn-secondary">Heroes</button>
+        </div>
+        <!-- <nav>
+            <a [routerLink]="RoutePaths.dashboard.toUrl()" [routerLinkActive]="'active'">Dashboard</a>
+            <a [routerLink]="RoutePaths.heroes.toUrl()" [routerLinkActive]="'active'">Heroes</a>
+        </nav> -->
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <router-outlet [routes]="Routes.all"></router-outlet>
+        </div>
+    </div>
+</div>

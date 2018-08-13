@@ -1,30 +1,36 @@
 <h3>Top Heroes</h3>
-<div class="grid grid-pad">
+<div >
+    <div *ngFor="let topHero of topHeroesList">
+        {{topHero.heroName}}
+    </div>
+        <!-- class="grid grid-pad" -->
     <!-- <div *ngFor="let hero of heroes">
     <div class="module hero">
       <h4>{{hero.name}}</h4>
     </div>
   </div> -->
-    <a *ngFor="let hero of heroes" class="col-1-4" [routerLink]="heroUrl(hero.id)">
+    <!-- <a *ngFor="let hero of nextGenHeroes" class="col-1-4" [routerLink]="heroUrl(hero.heroId)">
         <div class="module hero">
-            <h4>{{hero.name}}</h4>
+            <h4>{{hero.heroName}}</h4>
         </div>
-    </a>
+    </a> -->
 </div>
 
-<hero-search></hero-search>
+<!-- <hero-search></hero-search> -->
 
 <div class="container">
     <div class="row">
-        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
-            <h4>Retrieve Heroes from Backend</h4>
-            <div *ngFor="let nxtHero of nextGenHeroes">
+        <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-12">
+            <div class="dashboard-title">
+                <h4>New Generation Heroes Database</h4>
+            </div>
+            <div *ngFor="let nxtHero of nextGenHeroesList">
                 <a>{{nxtHero.heroName}}</a>
                 <a>{{nxtHero.heroAbility}}</a>
             </div>
         </div>
 
-        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+        <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
             <h4>Add New Hero to Backend</h4>
             <form>
                 <div class="form-group">
@@ -37,6 +43,6 @@
                 </div>
                 <button type="button" class="btn btn-primary" (click)="addNewHero()">Add Hero</button>
             </form>
-        </div>
+        </div> -->
     </div>
 </div>

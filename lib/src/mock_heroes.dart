@@ -1,4 +1,4 @@
-import 'hero.dart';
+import './support/data_model/hero.dart';
 
 final mockHeroes = <Hero>[
   Hero(6, 'Hero Number 6'),

@@ -3,8 +3,7 @@ import 'package:angular_router/angular_router.dart';
 import 'package:angular_forms/angular_forms.dart';
 
 import './hero_tour/hero_search/hero_search_component.dart';
-import 'hero.dart';
-import './hero_tour/hero_service/hero_service.dart';
+import './support/data_model/hero.dart';
 import './support/data_model/next_generate_hero.dart';
 import './support/server_calls/hero_data_service.dart';
 import 'route_paths.dart';
@@ -24,31 +23,28 @@ import 'dart:html';
 )
 
 class DashboardComponent implements OnInit {
-  List<Hero> heroes;
-
   // list of new generation heroes
-  List<NextGenHero> nextGenHeroes;
+  List<NextGenHero> nextGenHeroesList;
+  // list of top heroes
+  List<NextGenHero> topHeroesList;
   // new generation hero
   NextGenHero newGenHero;
 
-  // url for one single hero
+  // routing url for one single hero
   String heroUrl(int id) => RoutePaths.hero.toUrl(parameters: {idParam: '$id'});
-
-  // final HeroService _heroService;
 
   final HeroDataService _heroDataService;
 
   DashboardComponent(
-    // this._heroService,
     this._heroDataService,
     );
 
   @override
   void ngOnInit() async {
     // heroes = (await _heroService.getAllHeroes()).skip(1).take(4).toList();
-
-    window.console.log("Dashboard fetching data");
-    nextGenHeroes = await this._heroDataService.getAllHeroes();
+    print("Dashboard fetching data...");
+    nextGenHeroesList = await this._heroDataService.getAllHeroes();
+    topHeroesList = nextGenHeroesList.skip(1).take(2).toList();
   }
 
   // send new hero information to backend server
@@ -56,7 +52,7 @@ class DashboardComponent implements OnInit {
     // var heroName = document.getElementById("name").nodeValue;
     // var heroAbility = document.getElementById("ability").nodeValue;
 
-    window.console.log(newGenHero.heroName);
+    // window.console.log(newGenHero.heroName);
   }
 }
 

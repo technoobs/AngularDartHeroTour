@@ -3,6 +3,7 @@ import 'package:angular_router/angular_router.dart';
 
 import '../hero_service/hero_service.dart';
 import '../hero_tour_list/hero_tour_list_component.dart';
+import '../../support/server_calls/hero_data_service.dart';
 
 import '../../routes.dart';
 
@@ -14,9 +15,21 @@ import '../../routes.dart';
     routerDirectives,
     HeroTourListComponent
   ],
-  providers: [ClassProvider(HeroService)],
+  providers: [
+    ClassProvider(HeroService),
+    ClassProvider(HeroDataService),
+  ],
   exports: [RoutePaths, Routes],
 )
 class HeroTourApp {
+  // router for route navigation
+  final Router _router;
   final title = 'Tour of Heroes';
+
+  HeroTourApp(this._router);
+
+  // function that navigate to dashboard
+  goToDashboard() {
+    _router.navigate(RoutePaths.dashboard.toUrl());
+  }
 }

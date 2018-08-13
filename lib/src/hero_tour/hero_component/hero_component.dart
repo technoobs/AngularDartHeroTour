@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:angular_router/angular_router.dart';
-import '../../hero.dart';
+import '../../support/data_model/hero.dart';
 
 import '../hero_service/hero_service.dart';
 import '../../route_paths.dart';
