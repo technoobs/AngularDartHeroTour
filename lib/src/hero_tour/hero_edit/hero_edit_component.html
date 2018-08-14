@@ -1,0 +1,27 @@
+<div class="edit-div">
+    <form class="edit-form">
+        <div class="form-group">
+            <label for="name">Hero Name</label>
+            <input type="text" class="form-control" id="name" [(ngModel)]="newHero.heroName" ngControl="name" required>
+        </div>
+        <div class="form-group">
+            <label for="ability-type">Ability Type</label>
+            <select id="ability-type" [(ngModel)]="newHero.abilityType" ngControl="ability-type" required>
+                <option disabled>Select Ability Type</option>
+                <option value="Fire">Fire</option>
+                <option value="Water">Water</option>
+                <option value="Thunder">Thunder</option>
+                <option value="Ground">Ground</option>
+                <option value="Wind">Wind</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="ability">Hero Ability</label>
+            <input type="text" class="form-control" id="ability" [(ngModel)]="newHero.heroAbility" ngControl="ability" required>
+        </div>
+        <div class="form-btn">
+            <button type="button" class="btn btn-primary" (click)="submitHero()">Add Hero</button>
+            <small class="col text-right">*&nbsp;Required</small>
+        </div>
+    </form>
+</div>

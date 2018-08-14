@@ -12,8 +12,8 @@ import '../data_model/next_generate_hero.dart';
 class HeroDataService {
 
   // base URL for api
-  static
-  const _baseUrl = "http://tecnooob.com/dartserver/";
+  static const _baseUrl = "http://tecnooob.com/dartserver/";
+  // static const _baseUrl = "http://localhost:30000/api/";
   // default header for post request
   static final _headers = {
     'Content-Type': 'application/json'
@@ -50,7 +50,7 @@ class HeroDataService {
 
       final response = await _http.get(_baseUrl + "heroes/get/" + heroId);
       dynamic responseData = _extractData(response);
-      final heroDetail = (responseData as Object);
+      final heroDetail = NextGenHero.fromJson((responseData as Object));
 
       return heroDetail;
     } catch (e) {
@@ -59,19 +59,47 @@ class HeroDataService {
   }
 
   // submit hero data to backend server
-  Future <NextGenHero> submitNewHero(NextGenHero newHero) async {
+  Future <NextGenHero> submitNewHero(dynamic newHero) async {
     try {
-      print("Service calling....");
-      print(newHero);
-      assert(newHero.heroName != null);
+      assert(newHero['name'] != "");
+      assert(newHero['abilityType'] != "");
+      assert(newHero['ability'] != "");
 
       final response = await _http.post(
         _baseUrl + "heroes/add", headers: _headers, body: json.encode(newHero));
+      print(response);
       dynamic responseData = _extractData(response);
-      final newHeroDetail = (responseData as Object);
+      final newHeroDetail = NextGenHero.fromJson((responseData as Object));
 
+      assert(newHeroDetail.heroId.toString() != "");
+      
       return newHeroDetail;
     } catch (e) {
+      throw _handleError(e);
+    }
+  }
+
+  // get all heroes that belong to the same ability type
+  Future <List<NextGenHero>> searchAllTypeHeroes(String abilityType) async {
+    try {
+      assert(abilityType != "");
+      final response = await _http.get(_baseUrl + "heroes/" + abilityType + "/get");
+      dynamic responseData = _extractData(response);
+      final heroCollection = (responseData as List).map(
+        (value) => NextGenHero.fromJson(value)
+      ).toList();
+
+      return heroCollection;
+    } catch(e) {
+      throw _handleError(e);
+    }
+  }
+
+  Future <ServerInfoResponse> deleteHero(String heroId) async {
+    try {
+      assert(heroId != "");
+
+    } catch(e) {
       throw _handleError(e);
     }
   }
@@ -84,6 +112,11 @@ class HeroDataService {
   dynamic _extractData(Response resp) {
     print("Extracting data from server response....");
     return json.decode(resp.body)['data'];
+  }
+
+  dynamic _extractInfo(Response resp) {
+    print("Extracting info from server response....");
+    return json.decode(resp.body)['info'];
   }
 
 }

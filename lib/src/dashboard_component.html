@@ -23,6 +23,14 @@
             <button type="button" class="btn btn-primary" (click)="addNewHero()">Add New Hero</button>
         </div>
         <div class="col-12 display-panel">
+            <div class="d-flex justify-content-center">
+                <div *ngIf="displayAddForm">
+                    <app-hero-edit></app-hero-edit>
+                </div>
+                <div *ngIf="displayAll">
+                    <app-hero-tour-list></app-hero-tour-list>
+                </div>
+            </div>
             <!-- <router-outlet></router-outlet> -->
         </div>
     </div>

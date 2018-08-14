@@ -20,3 +20,9 @@ class SingleHeroResponse {
     print("$data");
   }
 }
+
+// server response for delete
+class ServerInfoResponse {
+  String info;
+  ServerInfoResponse(String info);
+}

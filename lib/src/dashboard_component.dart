@@ -2,13 +2,12 @@ import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:angular_forms/angular_forms.dart';
 
+import './hero_tour/hero_edit/hero_edit_component.dart';
 import './hero_tour/hero_search/hero_search_component.dart';
 import './support/data_model/hero.dart';
 import './support/data_model/next_generate_hero.dart';
 import './support/server_calls/hero_data_service.dart';
 import 'route_paths.dart';
-
-import 'dart:html';
 
 @Component(
   selector: 'my-dashboard',
@@ -17,7 +16,8 @@ import 'dart:html';
   directives: [
     coreDirectives, 
     routerDirectives,
-    formDirectives, 
+    formDirectives,
+    HeroEditComponent,
     // HeroSearchComponent
   ],
 )
@@ -35,6 +35,8 @@ class DashboardComponent implements OnInit {
 
   // status for single hero data
   bool displayAll = false;
+  // status to control add form
+  bool displayAddForm = false;
 
   final HeroDataService _heroDataService;
 
@@ -44,7 +46,6 @@ class DashboardComponent implements OnInit {
 
   @override
   void ngOnInit() async {
-    // heroes = (await _heroService.getAllHeroes()).skip(1).take(4).toList();
     this._prepareHeroesData();
   }
 
@@ -52,11 +53,7 @@ class DashboardComponent implements OnInit {
   _prepareHeroesData() async {
     print("Prepare heroes data for dashboard...");
     nextGenHeroesList = await this._heroDataService.getAllHeroes();
-    topHeroesList = nextGenHeroesList.skip(1).take(2).toList();
-
-    // nextGenHero = NextGenHero.fromJson(
-    //   await this._heroDataService.getHeroDetails("6669980564021845")
-    // );
+    topHeroesList = nextGenHeroesList.skip(1).take(4).toList();
   }
 
   // display all heroes
@@ -66,11 +63,7 @@ class DashboardComponent implements OnInit {
 
   // add new hero
   addNewHero() {
-    
-    // var heroName = document.getElementById("name").nodeValue;
-    // var heroAbility = document.getElementById("ability").nodeValue;
-
-    // window.console.log(newGenHero.heroName);
+    this.displayAddForm = true;
   }
 
 }

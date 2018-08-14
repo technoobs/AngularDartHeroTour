@@ -21,6 +21,8 @@ class HeroEditComponent implements OnInit {
   final HeroDataService _heroDataService;
   // hero data for editing
   NextGenHero nextGenHero;
+  // new added hero
+  NewHeroToAdd newHero = new NewHeroToAdd("", "", "");
 
   HeroEditComponent(
     this._heroDataService
@@ -28,17 +30,19 @@ class HeroEditComponent implements OnInit {
 
   @override
   void ngOnInit() {
-
   }
 
   // submit hero data
   submitHero() async {
-    try {
-      print("Submitting new hero data");
-      assert(nextGenHero != null);
-      
+    assert(newHero.heroName != "");
+    assert(newHero.heroAbility != "");
+
+    final newHeroDetail = await this._heroDataService.submitNewHero(newHero.toJson());
+
+    if(newHeroDetail.heroId.toString() != "") {
+      print("Ready to navigate to hero....");
     }
-  }  
+  }
 
 
 }

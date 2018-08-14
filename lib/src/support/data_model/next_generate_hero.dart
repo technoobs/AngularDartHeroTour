@@ -29,3 +29,21 @@ class NextGenHero {
     "heroAbilty": heroAbility 
     };
 }
+
+// new hero class for adding
+class NewHeroToAdd {
+  // hero name
+  String heroName;
+  // ability type
+  String abilityType;
+  // hero ability, need to split by comma if multiple abilities appear
+  String heroAbility;
+
+  NewHeroToAdd(this.heroName, this.abilityType, this.heroAbility);
+
+  Map toJson() => {
+    "name": heroName,
+    "abilityType": abilityType,
+    "ability": heroAbility 
+    };
+}
