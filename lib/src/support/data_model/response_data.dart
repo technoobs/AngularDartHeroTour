@@ -1,4 +1,6 @@
 
+import './next_generate_hero.dart';
+
 // data model of server response data
 class HeroResponse {
   // response success or failure
@@ -7,4 +9,14 @@ class HeroResponse {
   dynamic data;
 
   HeroResponse(String info, dynamic data);
+}
+
+// data model of single hero response data
+class SingleHeroResponse {
+  NextGenHero data;
+
+  SingleHeroResponse(NextGenHero data) {
+    print("Single hero response...");
+    print("$data");
+  }
 }

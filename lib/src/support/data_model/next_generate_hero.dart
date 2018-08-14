@@ -22,7 +22,8 @@ class NextGenHero {
       nextGenHero['heroAbilty']
       );
   
-  Map toJson() => { 
+  Map toJson() => {
+    "heroId": heroId,
     "heroName": heroName,
     "abilityType": abilityType,
     "heroAbilty": heroAbility 

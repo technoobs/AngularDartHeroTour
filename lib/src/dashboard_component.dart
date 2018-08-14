@@ -18,7 +18,7 @@ import 'dart:html';
     coreDirectives, 
     routerDirectives,
     formDirectives, 
-    HeroSearchComponent
+    // HeroSearchComponent
   ],
 )
 
@@ -28,10 +28,13 @@ class DashboardComponent implements OnInit {
   // list of top heroes
   List<NextGenHero> topHeroesList;
   // new generation hero
-  NextGenHero newGenHero;
+  NextGenHero nextGenHero;
 
   // routing url for one single hero
   String heroUrl(int id) => RoutePaths.hero.toUrl(parameters: {idParam: '$id'});
+
+  // status for single hero data
+  bool displayAll = false;
 
   final HeroDataService _heroDataService;
 
@@ -42,17 +45,33 @@ class DashboardComponent implements OnInit {
   @override
   void ngOnInit() async {
     // heroes = (await _heroService.getAllHeroes()).skip(1).take(4).toList();
-    print("Dashboard fetching data...");
-    nextGenHeroesList = await this._heroDataService.getAllHeroes();
-    topHeroesList = nextGenHeroesList.skip(1).take(2).toList();
+    this._prepareHeroesData();
   }
 
-  // send new hero information to backend server
+  // prepare hero data to display
+  _prepareHeroesData() async {
+    print("Prepare heroes data for dashboard...");
+    nextGenHeroesList = await this._heroDataService.getAllHeroes();
+    topHeroesList = nextGenHeroesList.skip(1).take(2).toList();
+
+    // nextGenHero = NextGenHero.fromJson(
+    //   await this._heroDataService.getHeroDetails("6669980564021845")
+    // );
+  }
+
+  // display all heroes
+  displayAllHeroes() {
+    this.displayAll = true;
+  }
+
+  // add new hero
   addNewHero() {
+    
     // var heroName = document.getElementById("name").nodeValue;
     // var heroAbility = document.getElementById("ability").nodeValue;
 
     // window.console.log(newGenHero.heroName);
   }
+
 }
 
