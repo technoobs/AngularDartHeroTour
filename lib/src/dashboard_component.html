@@ -22,47 +22,7 @@
             <button type="button" class="btn btn-outline-primary" (click)="displayAllHeroes()">Show All Heroes</button>
             <button type="button" class="btn btn-primary" (click)="addNewHero()">Add New Hero</button>
         </div>
-        <div class="col-12 display-panel">
-            <div class="d-flex justify-content-center">
-                <div *ngIf="displayAddForm">
-                    <app-hero-edit></app-hero-edit>
-                </div>
-                <div *ngIf="displayAll">
-                    <app-hero-tour-list></app-hero-tour-list>
-                </div>
-            </div>
-            <!-- <router-outlet></router-outlet> -->
-        </div>
     </div>
 </div>
 
 <!-- <hero-search></hero-search> -->
-
-<div class="container">
-    <div class="row">
-        <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-12">
-            <div class="dashboard-title">
-                <h4>New Generation Heroes Database</h4>
-            </div>
-            <div *ngFor="let nxtHero of nextGenHeroesList">
-                <a>{{nxtHero.heroName}}</a>
-                <a>{{nxtHero.heroAbility}}</a>
-            </div>
-        </div>
-
-        <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
-            <h4>Add New Hero to Backend</h4>
-            <form>
-                <div class="form-group">
-                    <label for="name">Hero Name</label>
-                    <input type="text" class="form-control" id="name" [(ngModel)]="newGenHero.heroName" ngControl="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="ability">Hero Ability</label>
-                    <input type="text" class="form-control" id="ability" [(ngModel)]="newGenHero.heroAbility" ngControl="ability" required>
-                </div>
-                <button type="button" class="btn btn-primary" (click)="addNewHero()">Add Hero</button>
-            </form>
-        </div> -->
-    </div>
-</div>

@@ -32,4 +32,9 @@ class HeroTourApp {
   goToDashboard() {
     _router.navigate(RoutePaths.dashboard.toUrl());
   }
+
+  // function that navigate to mixed displayed heroes
+  goToMixedHeroes() {
+    _router.navigate(RoutePaths.mixedHeroes.toUrl());
+  }
 }

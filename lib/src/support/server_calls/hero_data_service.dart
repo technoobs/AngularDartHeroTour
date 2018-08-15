@@ -27,7 +27,7 @@ class HeroDataService {
   Future <List<NextGenHero>> getAllHeroes() async {
     try {
       print("Starting to get all heroes data.....");
-      final response = await _http.get(_baseUrl + "heroes/get");
+      final response = await this._http.get(_baseUrl + "heroes/get");
 
       print("All heroes data is: ");
       dynamic responseData = _extractData(response);
@@ -48,7 +48,7 @@ class HeroDataService {
       assert(heroId is String);
       assert(heroId != "");
 
-      final response = await _http.get(_baseUrl + "heroes/get/" + heroId);
+      final response = await this._http.get(_baseUrl + "heroes/get/" + heroId);
       dynamic responseData = _extractData(response);
       final heroDetail = NextGenHero.fromJson((responseData as Object));
 
@@ -65,7 +65,7 @@ class HeroDataService {
       assert(newHero['abilityType'] != "");
       assert(newHero['ability'] != "");
 
-      final response = await _http.post(
+      final response = await this._http.post(
         _baseUrl + "heroes/add", headers: _headers, body: json.encode(newHero));
       print(response);
       dynamic responseData = _extractData(response);
@@ -83,7 +83,7 @@ class HeroDataService {
   Future <List<NextGenHero>> searchAllTypeHeroes(String abilityType) async {
     try {
       assert(abilityType != "");
-      final response = await _http.get(_baseUrl + "heroes/" + abilityType + "/get");
+      final response = await this._http.get(_baseUrl + "heroes/" + abilityType + "/get");
       dynamic responseData = _extractData(response);
       final heroCollection = (responseData as List).map(
         (value) => NextGenHero.fromJson(value)
@@ -95,10 +95,26 @@ class HeroDataService {
     }
   }
 
-  Future <ServerInfoResponse> deleteHero(String heroId) async {
+  // delete hero by providing hero id
+  Future <String> deleteHero(String heroId) async {
     try {
       assert(heroId != "");
+      final response = await this._http.get(_baseUrl + "heroes/delete/" + heroId);
+      dynamic responseData = _extractInfo(response);
+      final responseInfo = responseData as String;
+      
+      return responseInfo;
+    } catch(e) {
+      throw _handleError(e);
+    }
+  }
 
+  // delete all heroes
+  Future <void> deleteAllHeroes() async {
+    try {
+      final response = await this._http.get(_baseUrl + "heroes/deleteall");
+      dynamic responseData = _extractData(response);
+      
     } catch(e) {
       throw _handleError(e);
     }

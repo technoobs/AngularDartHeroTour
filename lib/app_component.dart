@@ -13,19 +13,5 @@ import 'src/hero_tour/hero_route/hero_tour_route_component.dart';
   ],
 )
 class AppComponent {
-  // default value to control view display
-  bool show_hero_view = false;
-  bool show_todo_view = true;
-
-  // display Hero component
-  void changeViewToHero() {
-    this.show_todo_view = false;
-    this.show_hero_view = true;
-  }
-
-  // display Todo component
-  void changeViewToTodo() {
-    this.show_hero_view = false;
-    this.show_todo_view = true;
-  }
+  
 }

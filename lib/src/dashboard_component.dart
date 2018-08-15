@@ -2,11 +2,14 @@ import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 import 'package:angular_forms/angular_forms.dart';
 
+import './hero_tour/hero_tour_list/hero_tour_list_component.dart';
 import './hero_tour/hero_edit/hero_edit_component.dart';
 import './hero_tour/hero_search/hero_search_component.dart';
 import './support/data_model/hero.dart';
 import './support/data_model/next_generate_hero.dart';
 import './support/server_calls/hero_data_service.dart';
+
+import 'routes.dart';
 import 'route_paths.dart';
 
 @Component(
@@ -18,8 +21,10 @@ import 'route_paths.dart';
     routerDirectives,
     formDirectives,
     HeroEditComponent,
+    HeroTourListComponent,
     // HeroSearchComponent
   ],
+  exports: [RoutePaths, Routes],
 )
 
 class DashboardComponent implements OnInit {
@@ -38,9 +43,11 @@ class DashboardComponent implements OnInit {
   // status to control add form
   bool displayAddForm = false;
 
+  final Router _router;
   final HeroDataService _heroDataService;
 
   DashboardComponent(
+    this._router,
     this._heroDataService,
     );
 
@@ -58,13 +65,25 @@ class DashboardComponent implements OnInit {
 
   // display all heroes
   displayAllHeroes() {
+    this.displayAddForm = false;
     this.displayAll = true;
+
+    // this._router.navigate(_heroDisplayUrl("classified"));
+    // print(_heroDisplayUrl("classified"));
+    this._router.navigate(RoutePaths.classifiedHeroes.toUrl());
   }
 
   // add new hero
   addNewHero() {
+    this.displayAll = false;
     this.displayAddForm = true;
+
+    this._router.navigate(RoutePaths.addHero.toUrl());
   }
+
+  // String _heroDisplayUrl(String mode) => RoutePaths.heroes.toUrl(parameters: {
+  //   displayMode: '$mode'
+  // });
 
 }
 
