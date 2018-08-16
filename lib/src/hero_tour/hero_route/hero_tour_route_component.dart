@@ -1,7 +1,6 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 
-import '../hero_service/hero_service.dart';
 import '../hero_tour_list/hero_tour_list_component.dart';
 import '../../support/server_calls/hero_data_service.dart';
 
@@ -16,7 +15,6 @@ import '../../routes.dart';
     HeroTourListComponent
   ],
   providers: [
-    ClassProvider(HeroService),
     ClassProvider(HeroDataService),
   ],
   exports: [RoutePaths, Routes],

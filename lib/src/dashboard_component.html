@@ -8,7 +8,7 @@
         <div class="col-12">
             <div class="top-hero">
                 <div class="row">
-                    <div *ngFor="let topHero of topHeroesList" class="col-3">
+                    <div *ngFor="let topHero of topHeroesList" class="col-3" (click)="onSelect(topHero)">
                         <div class="top-hero-card">
                             <h3>{{topHero.heroName}}</h3>
                         </div>
@@ -24,5 +24,3 @@
         </div>
     </div>
 </div>
-
-<!-- <hero-search></hero-search> -->

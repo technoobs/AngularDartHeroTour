@@ -7,8 +7,8 @@
             <div class="ability-head fire">
                 <h4>Fire</h4>
             </div>
-            <div *ngIf="fireHeroes.length == 0">
-                <button type="button" class="btn btn-primary">Add Fire Hero</button>
+            <div class="add-btn" *ngIf="fireHeroes.length == 0">
+                No Heroes
             </div>
             <div *ngIf="fireHeroes.length != 0">
                 <div *ngFor="let hero of fireHeroes; let i = index" (click)="onSelect(hero)">
@@ -22,8 +22,8 @@
             <div class="ability-head water">
                 <h4>Water</h4>
             </div>
-            <div *ngIf="waterHeroes.length == 0">
-                <button type="button" class="btn btn-primary">Add Water Hero</button>
+            <div class="add-btn" *ngIf="waterHeroes.length == 0">
+                No Heroes
             </div>
             <div *ngIf="waterHeroes.length != 0">
                 <div *ngFor="let hero of waterHeroes; let i = index" (click)="onSelect(hero)">
@@ -37,8 +37,8 @@
             <div class="ability-head ground">
                 <h4>Ground</h4>
             </div>
-            <div *ngIf="groundHeroes.length == 0">
-                <button type="button" class="btn btn-primary">Add Ground Hero</button>
+            <div class="add-btn" *ngIf="groundHeroes.length == 0">
+                No Heroes
             </div>
             <div *ngIf="groundHeroes.length != 0">
                 <div *ngFor="let hero of groundHeroes; let i = index" (click)="onSelect(hero)">
@@ -52,8 +52,8 @@
             <div class="ability-head wind">
                 <h4>Wind</h4>
             </div>
-            <div *ngIf="windHeroes.length == 0">
-                <button type="button" class="btn btn-primary">Add Wind Hero</button>
+            <div class="add-btn" *ngIf="windHeroes.length == 0">
+                No Heroes
             </div>
             <div *ngIf="windHeroes.length != 0">
                 <div *ngFor="let hero of windHeroes; let i = index" (click)="onSelect(hero)">
@@ -67,8 +67,8 @@
             <div class="ability-head thunder">
                 <h4>Thunder</h4>
             </div>
-            <div *ngIf="thunderHeroes.length == 0">
-                <button type="button" class="btn btn-primary">Add Thunder Hero</button>
+            <div class="add-btn" *ngIf="thunderHeroes.length == 0">
+                No Heroes
             </div>
             <div *ngIf="thunderHeroes.length != 0">
                 <div *ngFor="let hero of thunderHeroes; let i = index" (click)="onSelect(hero)">
@@ -80,49 +80,32 @@
         </div>
     </div>
     <div *ngIf="displayMode == 'mixed'">
-        <div class="row mixed-hero-tag" *ngFor="let hero of heroList; let i = index" (click)="onSelect(hero)">
-            <div class="d-flex mixed-hero">
-                <div class="mr-auto">
-                    <span>{{i + 1}}.</span>{{hero.heroName}}
-                </div>
-                <div>
-                    {{hero.abilityType}}
+        <div class="row">
+            <div class="col-7" *ngIf="filteredHeroList.isEmpty == true">
+                <h3>No Heroes</h3>
+            </div>
+            <div class="col-7" *ngIf="filteredHeroList.isEmpty == false">
+                <div class="row mixed-hero-tag" *ngFor="let hero of filteredHeroList; let i = index">
+                    <div class="d-flex mixed-hero" (click)="onSelect(hero)">
+                        <div class="mr-auto">
+                            <span>{{i + 1}}.</span>{{hero.heroName}}
+                        </div>
+                        <div>
+                            {{hero.abilityType}}
+                        </div>
+                    </div>
+                    <i class="far fa-trash-alt" (click)="deleteSelectedHero(hero)"></i>
                 </div>
             </div>
-            <i class="far fa-trash-alt" (click)="deleteSelectedHero(hero)"></i>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <button type="button" class="btn btn-danger" (click)="deleteAllHeroes()">Delete All Heroes</button>
+            <div class="col-5">
+                <div class="row search-div">
+                    <hero-search [heroesList]="heroList" (sendSearchResult)="getSearchResult($event)"></hero-search>
+                </div>
+                <div class="row btn-div" style="margin-top: 1rem; text-align: center">
+                    <button type="button" class="btn btn-info" (click)="addNewHero()">Add New Hero</button>
+                    <button type="button" class="btn btn-danger" (click)="deleteAllHeroes()">Delete All Heroes</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-
-<!-- <h1>{{title}}</h1>
-<h2>Heroes</h2>
-
-<div>
-    <label>Hero name:</label>
-    <input #heroName />
-    <button (click)="add(heroName.value); heroName.value=''">
-        Add
-    </button>
-</div>
-
-
-<ul class="heroes">
-    <li *ngFor="let hero of heroList" (click)="onSelect(hero)" [class.selected]="hero === selectedHero">
-        <span class="badge">{{hero.id}}</span> {{hero.name}}
-        <button class="delete" (click)="delete(hero); $event.stopPropagation()">x</button>
-    </li>
-</ul>
-
-
-<div *ngIf="selectedHero != null">
-    <h2>
-        {{selectedHero.name | uppercase}} is my hero
-    </h2>
-    <button (click)="gotoDetail()">View Details</button>
-</div> -->

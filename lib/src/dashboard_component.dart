@@ -4,8 +4,6 @@ import 'package:angular_forms/angular_forms.dart';
 
 import './hero_tour/hero_tour_list/hero_tour_list_component.dart';
 import './hero_tour/hero_edit/hero_edit_component.dart';
-import './hero_tour/hero_search/hero_search_component.dart';
-import './support/data_model/hero.dart';
 import './support/data_model/next_generate_hero.dart';
 import './support/server_calls/hero_data_service.dart';
 
@@ -20,9 +18,8 @@ import 'route_paths.dart';
     coreDirectives, 
     routerDirectives,
     formDirectives,
-    HeroEditComponent,
-    HeroTourListComponent,
-    // HeroSearchComponent
+    // HeroEditComponent,
+    // HeroTourListComponent,
   ],
   exports: [RoutePaths, Routes],
 )
@@ -33,7 +30,7 @@ class DashboardComponent implements OnInit {
   // list of top heroes
   List<NextGenHero> topHeroesList;
   // new generation hero
-  NextGenHero nextGenHero;
+  // NextGenHero nextGenHero;
 
   // routing url for one single hero
   String heroUrl(int id) => RoutePaths.hero.toUrl(parameters: {idParam: '$id'});
@@ -56,6 +53,11 @@ class DashboardComponent implements OnInit {
     this._prepareHeroesData();
   }
 
+  // clikc and show hero details
+  onSelect(NextGenHero hero) {
+    this._router.navigate(RoutePaths.hero.toUrl(parameters: {idParam: hero.heroId}));
+  }
+
   // prepare hero data to display
   _prepareHeroesData() async {
     print("Prepare heroes data for dashboard...");
@@ -65,19 +67,11 @@ class DashboardComponent implements OnInit {
 
   // display all heroes
   displayAllHeroes() {
-    this.displayAddForm = false;
-    this.displayAll = true;
-
-    // this._router.navigate(_heroDisplayUrl("classified"));
-    // print(_heroDisplayUrl("classified"));
     this._router.navigate(RoutePaths.classifiedHeroes.toUrl());
   }
 
   // add new hero
   addNewHero() {
-    this.displayAll = false;
-    this.displayAddForm = true;
-
     this._router.navigate(RoutePaths.addHero.toUrl());
   }
 

@@ -1,12 +1,11 @@
 import 'dart:html';
-import 'dart:async';
 
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:angular_router/angular_router.dart';
-import '../../support/data_model/hero.dart';
 
-import '../hero_service/hero_service.dart';
+import '../../support/data_model/next_generate_hero.dart';
+import '../../support/server_calls/hero_data_service.dart';
 import '../../route_paths.dart';
 
 @Component(
@@ -14,37 +13,23 @@ import '../../route_paths.dart';
   styleUrls: ['hero_component.css'],
   templateUrl: 'hero_component.html',
   directives: [coreDirectives, formDirectives],
+  providers: [ClassProvider(HeroDataService)],
 )
 class HeroComponent implements OnActivate {
-  // @Input()
-  Hero hero;
 
-  final HeroService _heroService;
+  final HeroDataService _heroDataService;
   final Location _location;
 
-  HeroComponent(this._heroService, this._location);
+  NextGenHero hero;
+
+  HeroComponent(this._heroDataService, this._location);
 
   @override
   void onActivate(_, RouterState current) async {
     final id = getId(current.parameters);
-    if (id != null) hero = await (_heroService.get(id));
-  }
-
-  // get hero id
-  int getId(Map<String, String> parameters) {
-    final id = parameters[idParam];
-    window.console.log(id);
-    return id == null ? null : int.tryParse(id);
+    if (id != null) hero = await (_heroDataService.getHeroDetails(id.toString()));
   }
 
   // go back
   void goBack() => _location.back();
-
-  // save updated hero info
-  Future<void> save() async {
-    await _heroService.update(hero);
-    goBack();
-  }
-
-
 }

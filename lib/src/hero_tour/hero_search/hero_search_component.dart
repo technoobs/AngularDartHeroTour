@@ -1,41 +1,49 @@
 import 'dart:async';
 import 'package:angular/angular.dart';
-import 'package:angular_router/angular_router.dart';
-import 'package:stream_transform/stream_transform.dart';
-import '../../route_paths.dart';
-import 'hero_search_service.dart';
-import '../../support/data_model/hero.dart';
+import '../../support/data_model/next_generate_hero.dart';
+
 @Component(
   selector: 'hero-search',
   templateUrl: 'hero_search_component.html',
   styleUrls: ['hero_search_component.css'],
   directives: [coreDirectives],
-  providers: [ClassProvider(HeroSearchService)],
   pipes: [commonPipes],
 )
 class HeroSearchComponent implements OnInit {
-  HeroSearchService _heroSearchService;
-  Router _router;
 
-  Stream<List<Hero>> heroes;
-  
-  StreamController<String> _searchTerms = StreamController<String>.broadcast();
-  HeroSearchComponent(this._heroSearchService, this._router) {}
-  void search(String term) => _searchTerms.add(term);
+  // hero list for search filtering
+  @Input() List<NextGenHero> heroesList;
+  StreamController<String> _searchOptionsTerms = StreamController<String>.broadcast();
+  // send search result back to parent component
+  final _snedSearchOption = new StreamController<List<NextGenHero>>();
+  @Output() Stream<List<NextGenHero>> get sendSearchResult => _snedSearchOption.stream;
+
+  HeroSearchComponent() {}
 
   void ngOnInit() async {
-    heroes = _searchTerms.stream
-        .transform(debounce(Duration(milliseconds: 300)))
-        .distinct()
-        .transform(switchMap((term) => term.isEmpty
-            ? Stream<List<Hero>>.fromIterable([<Hero>[]])
-            : _heroSearchService.search(term).asStream()))
-        .handleError((e) {
-      print(e); // for demo purposes only
+    _searchOptionsTerms.stream.distinct().listen((term) {
+      print("From stream");
+      print(term);
+      this.processSearchOption(term);
     });
   }
-  String _heroUrl(int id) =>
-      RoutePaths.hero.toUrl(parameters: {idParam: '$id'});
-  Future<NavigationResult> gotoDetail(Hero hero) =>
-      _router.navigate(_heroUrl(hero.id));
+
+  // pass pressed key value back to stream
+  sendSearchOption(String term) {
+    print(this.heroesList);
+    _searchOptionsTerms.add(term);
+  }
+
+  // function that process search options
+  processSearchOption(String term) {
+    List<NextGenHero> filteredResult = new List<NextGenHero>();
+    for(var i in heroesList) {
+      if(i.heroName.toString().toUpperCase().indexOf(term.toUpperCase()) != -1) {
+        filteredResult.add(i);
+      }
+    }
+    print("Result is:");
+    filteredResult.forEach((e) => print(e.heroName));
+    this._snedSearchOption.add(filteredResult);
+  }
 }

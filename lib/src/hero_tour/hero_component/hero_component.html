@@ -1,11 +1,24 @@
-<div *ngIf="hero != null">
-    <h2>{{hero.name}}</h2>
-    <div>
-        <label>id: </label>{{hero.id}}</div>
-    <div>
-        <label>name: </label>
-        <input [(ngModel)]="hero.name" placeholder="name" />
+<div class="container" *ngIf="hero != null" style="margin-top: 1rem">
+    <div class="row">
+        <div class="col-12">
+            <h2>{{hero.heroName}}</h2>
+        </div>
+        <div class="col-12">
+            <label>Id: </label>{{hero.heroId}}</div>
+        <div class="col-12">
+            <label>Name: </label>
+            <input [(ngModel)]="hero.heroName" placeholder="Name" />
+        </div>
+        <div class="col-12">
+            <label>Type: </label>
+            <input [(ngModel)]="hero.abilityType" placeholder="Ability Type" />
+        </div>
+        <div class="col-12">
+            <label>Ability: </label>
+            <input [(ngModel)]="hero.heroAbility" placeholder="Ability" />
+        </div>
+        <div class="col-12">
+            <button type="button" class="btn btn-primary" (click)="goBack()">Back</button>
+        </div>
     </div>
-    <button (click)="goBack()">Back</button>
-    <button (click)="save()">Save</button>
 </div>

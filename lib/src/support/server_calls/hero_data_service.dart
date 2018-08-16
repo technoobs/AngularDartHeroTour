@@ -6,14 +6,13 @@ import 'dart:html';
 
 import 'package:http/http.dart';
 
-import '../data_model/response_data.dart';
 import '../data_model/next_generate_hero.dart';
 
 class HeroDataService {
 
   // base URL for api
   static const _baseUrl = "http://tecnooob.com/dartserver/";
-  // static const _baseUrl = "http://localhost:30000/api/";
+
   // default header for post request
   static final _headers = {
     'Content-Type': 'application/json'
