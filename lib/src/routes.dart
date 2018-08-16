@@ -4,6 +4,7 @@ import 'route_paths.dart';
 import './hero_tour/hero_tour_list/hero_tour_list_component.template.dart' as hero_tour_list_template;
 import 'dashboard_component.template.dart' as dashboard_template;
 import './hero_tour/hero_component/hero_component.template.dart' as hero_template;
+import './hero_tour/hero_edit/hero_edit_component.template.dart' as hero_edit_template;
 
 export 'route_paths.dart';
 
@@ -14,10 +15,19 @@ class Routes {
     component: hero_template.HeroComponentNgFactory,
   );
 
-  static final heroes = RouteDefinition(
-    routePath: RoutePaths.heroes,
+  static final classifiedHeroes = RouteDefinition(
+    routePath: RoutePaths.classifiedHeroes,
     component: hero_tour_list_template.HeroTourListComponentNgFactory,
-    // component: hero_list_template.HeroListComponentNgFactory,
+  );
+
+  static final mixedHeroes = RouteDefinition(
+    routePath: RoutePaths.mixedHeroes,
+    component: hero_tour_list_template.HeroTourListComponentNgFactory,
+  );
+
+  static final addHero = RouteDefinition(
+    routePath: RoutePaths.addHero,
+    component: hero_edit_template.HeroEditComponentNgFactory
   );
 
   static final dashboard = RouteDefinition(
@@ -30,8 +40,10 @@ class Routes {
       path: '',
       redirectTo: RoutePaths.dashboard.toUrl(),
     ),
-    heroes,
-    hero,
     dashboard,
+    classifiedHeroes,
+    mixedHeroes,
+    hero,
+    addHero
   ];
 }

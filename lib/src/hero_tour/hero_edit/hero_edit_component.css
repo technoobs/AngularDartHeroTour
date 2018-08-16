@@ -1,0 +1,50 @@
+
+.edit-div {
+    width: 500px;
+    height: 300px;
+    text-align: left;
+    margin-top: 2rem;
+}
+
+.edit-form {
+    padding: 15px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.edit-form label {
+    font-weight: bold;
+}
+
+.edit-form label::after {
+    content: "*";
+    color: red;
+}
+
+#ability-type option:not(:first-child) {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.form-btn {
+    text-align: center;
+}
+
+#back-btn {
+    margin-top: 1rem;
+    width: 100px;
+}
+
+#name-error {
+    display: none;
+    color: red;
+}
+
+#type-error {
+    display: none;
+    color: red;
+}
+
+#ability-error {
+    display: none;
+    color: red;
+}

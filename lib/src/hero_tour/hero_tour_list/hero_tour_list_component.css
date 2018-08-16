@@ -1,61 +1,137 @@
-.selected {
-    background-color: #CFD8DC !important;
+
+.ability-head {
+    height: 45px;
+    padding-top: 12px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.add-btn {
+    text-align: center;
+}
+
+.add-btn button {
+    margin-top: 5px;
+}
+
+.fire {
+    background-color: red;
     color: white;
 }
 
-.heroes {
-    margin: 0 0 2em 0;
-    list-style-type: none;
-    padding: 0;
-    width: 15em;
+.fire-hero {
+    background-color: #F08080;
+    color: black;
 }
 
-.heroes li {
+.water {
+    background-color: #1E90FF;
+    color: white;
+}
+
+.water-hero {
+    background-color: #ADD8E6;
+    color: black;
+}
+
+.ground {
+    background-color: #808000;
+    color: black;
+}
+
+.ground-hero {
+    background-color: #DAA520;
+    color: black;
+}
+
+.wind {
+    background-color: #00FF00;
+    color: black;
+}
+
+.wind-hero {
+    background-color: #ADFF2F;
+    color: black;
+}
+
+.thunder {
+    background-color: #9932CC;
+    color: white;
+}
+
+.thunder-hero {
+    background-color: #6A5ACD;
+    color: white;
+}
+
+.hero-tag {
+    max-width: 150px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: left;
+    font-weight: bold;
     cursor: pointer;
-    position: relative;
-    left: 0;
-    background-color: #EEE;
-    margin: .5em;
-    padding: .3em 0;
-    height: 1.6em;
-    border-radius: 4px;
+    border-radius: 5px;
 }
 
-.heroes li.selected:hover {
-    color: white;
+.hero-tag:hover, .mixed-hero:hover {
+    -ms-transform: scale(1, 1.2); /* IE 9 */
+    -webkit-transform: scale(1, 1.2); /* Safari */
+    transform: scale(1, 1.2);
 }
 
-.heroes li:hover {
-    color: #607D8B;
-    background-color: #EEE;
-    left: .1em;
+.hero-tag span {
+    margin-right: 2px;
+    margin-left: 2px;
 }
 
-.heroes .text {
-    position: relative;
-    top: -3px;
+.mixed-hero-tag {
+    width: 100%;
 }
 
-.heroes .badge {
-    display: inline-block;
-    font-size: small;
-    color: white;
-    padding: 0.8em 0.7em 0 0.7em;
-    background-color: #607D8B;
-    line-height: 1em;
-    position: relative;
-    left: -1px;
-    top: -4px;
-    height: 1.8em;
-    margin-right: .8em;
-    border-radius: 4px 0 0 4px;
+.mixed-hero-tag i {
+    margin-top: 25px;
+    font-size: 20px;
+    cursor: pointer;
 }
 
-button.delete {
-    float:right;
-    margin-top: 2px;
-    margin-right: .8em;
-    background-color: gray !important;
-    color:white;
-  }
-  
+.mixed-hero-tag i:hover {
+    color: red;
+}
+
+.mixed-hero {
+    padding: 5px;
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    height: 50px;
+    width: 300px;
+    margin: 1rem;
+    border: 1px solid grey;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.mixed-hero span {
+    margin: 2px;
+    font-size: bold;
+}
+
+.mixed-hero:hover {
+    background-color: #1E90FF;
+}
+
+.search-div {
+    padding: 2px;
+    margin-bottom: 1rem;
+}
+
+.btn-div {
+    padding: 2px;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.btn-div button {
+    margin-left: 5px;
+    margin-right: 5px;
+}
