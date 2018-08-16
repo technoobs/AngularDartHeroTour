@@ -1,6 +1,4 @@
 import 'package:angular/angular.dart';
-
-
 import 'src/hero_tour/hero_route/hero_tour_route_component.dart';
 
 @Component(
